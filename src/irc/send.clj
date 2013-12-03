@@ -27,8 +27,7 @@
               :err-not-on-channel  "442"
               :err-not-registered  "451"
               :err-need-more-params  "461"
-              :err-already-registered  "462"
-              })
+              :err-already-registered  "462"})
 
 (def command {:join  "JOIN"
               :nick  "NICK"
@@ -36,8 +35,7 @@
               :pass  "PASS"
               :privmsg  "PRIVMSG"
               :quit  "QUIT"
-              :user  "USER"
-              })
+              :user  "USER"})
 
 (defn nick-string [user]
   (if-let [nick (user-nick user)]
@@ -51,7 +49,7 @@
 (defn format-command-response [server source message message-text]
   (str ":" source " " (message command) " " message-text))
 
-(defmulti construct-message 
+(defmulti construct-message
   (fn  [server user message]
     (:message message)))
 
@@ -87,7 +85,7 @@
                   (str "= " (:chan message) " :"
                        (join " " (map user-nick
                                       (users-on-channel server
-                                                        (:chan message)))))))    
+                                                        (:chan message)))))))
 
 (defmethod construct-message :rpl-end-of-names
   [server user message]
